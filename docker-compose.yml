@@ -1,0 +1,17 @@
+services:
+  surrealdb:
+    image: surrealdb/surrealdb:latest
+    container_name: surrealdb
+    user: "0:0"
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    env_file: .env
+    command: [ "start", "--log", "info", "--bind", "0.0.0.0:8000", "--user", "${SURREAL_ROOT_USER}", "--pass", "${SURREAL_ROOT_PASS}", "file:/data/${SURREAL_DB_NAME}.db" ]
+    volumes:
+      - data:/data
+      - data:/logs
+
+volumes:
+  data:
+    name: inoculum
