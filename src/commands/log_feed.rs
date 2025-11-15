@@ -2,10 +2,10 @@
 pub async fn log_feed(flour_amount: f32, starter_amount: f32, water_amount: f32, water_temp: f32) -> Result<(), Box<dyn std::error::Error>> {
 
     let starter_feeding: crate::database::models::StarterFeeding = crate::database::models::StarterFeeding {
-        flour_amount: flour_amount,
-        starter_amount: starter_amount,
-        water_amount: water_amount,
-        water_temp: water_temp,
+        flour_amount,
+        starter_amount,
+        water_amount,
+        water_temp,
     };
 
     let database_connection: surrealdb::Surreal<surrealdb::engine::remote::ws::Client> =
