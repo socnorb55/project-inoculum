@@ -11,6 +11,10 @@ struct Cli {
 
 #[derive(Subcommand)]
 enum Commands {
+    FeedingHistory {
+        #[arg(short, long)]
+        maximum_results: Option<i32>,
+    },
     LogFeed {
         #[arg(short, long)]
         flour_amount: f32,
@@ -31,17 +35,18 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let arguments: Cli = Cli::parse();
 
     match &arguments.command {
+        Some(Commands::FeedingHistory { maximum_results }) => {
+            commands::feeding_history::feeding_history(*maximum_results).await?
+        }
         Some(Commands::LogFeed {
             flour_amount,
             starter_amount,
             water_amount,
             water_temp,
-        }) => commands::log_feed::log_feed(
-            *flour_amount,
-            *starter_amount,
-            *water_amount,
-            *water_temp,
-        ).await?,
+        }) => {
+            commands::log_feed::log_feed(*flour_amount, *starter_amount, *water_amount, *water_temp)
+                .await?
+        }
         None => {
             println!("No command provided");
         }
