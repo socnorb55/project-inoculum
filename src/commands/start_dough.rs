@@ -82,7 +82,7 @@ pub async fn start_dough(
             .map(|(name, _)| *name)
             .collect();
 
-        if missing_required_ingredients.len() > 0 {
+        if !missing_required_ingredients.is_empty() {
 
             println!("Missing required ingredients: {:?}", missing_required_ingredients);
 
