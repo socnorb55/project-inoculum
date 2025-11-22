@@ -101,6 +101,10 @@ pub async fn start_dough(
             let sugar_value = sugar.unwrap_or(0.0);
             let water_value = water.unwrap();
 
+            if flour_value <= 0.0 {
+                println!("Invalid value for flour: must be greater than zero.");
+                return Ok(());
+            }
             let hydration = (water_value / flour_value) * 100.0;
             let total_weight = fat_value + flour_value + leaven_value + salt_value + sugar_value + water_value;
 
