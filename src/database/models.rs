@@ -26,7 +26,7 @@ pub struct Dough {
     pub water: f32,
 }
 
-#[derive(Debug, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub enum DoughStatus {
     BulkProofing,
     Cooking,
