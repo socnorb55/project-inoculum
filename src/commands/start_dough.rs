@@ -44,6 +44,10 @@ pub async fn start_dough(
             let sugar_value = recipe_data.sugar.unwrap_or(0.0) * scale_value;
             let water_value = recipe_data.water * scale_value;
 
+            if flour_value <= 0.0 {
+                println!("Error: Flour value must be greater than zero to calculate hydration.");
+                return Ok(());
+            }
             let hydration = (water_value / flour_value) * 100.0;
             let total_weight = fat_value + flour_value + leaven_value + salt_value + sugar_value + water_value;
 
