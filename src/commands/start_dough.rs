@@ -118,7 +118,7 @@ pub async fn start_dough(
 
             println!("Created dough: {:?}", created);
 
-            return Ok(())
+            Ok(())
         }
 
     }
