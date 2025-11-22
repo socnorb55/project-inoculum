@@ -1,6 +1,21 @@
 DEFINE TABLE starter_feeding_log SCHEMAFULL;
 DEFINE FIELD flour_amount ON TABLE starter_feeding_log TYPE float;
+DEFINE FIELD id ON TABLE doughs TYPE string;
 DEFINE FIELD starter_amount ON TABLE starter_feeding_log TYPE float;
 DEFINE FIELD timestamp ON TABLE starter_feeding_log TYPE datetime;
 DEFINE FIELD water_amount ON TABLE starter_feeding_log TYPE float;
 DEFINE FIELD water_temp ON TABLE starter_feeding_log TYPE float;
+
+DEFINE TABLE doughs SCHEMAFULL;
+DEFINE FIELD fat ON TABLE doughs TYPE float;
+DEFINE FIELD four ON TABLE doughs TYPE float;
+DEFINE FIELD hydration ON TABLE doughs TYPE float;
+DEFINE FIELD id ON TABLE doughs TYPE string;
+DEFINE FIELD leaven ON TABLE doughs TYPE float;
+DEFINE FIELD name ON TABLE doughs TYPE string;
+DEFINE FIELD salt ON TABLE doughs TYPE float;
+DEFINE FIELD status ON TABLE doughs TYPE string;
+DEFINE FIELD sugar ON TABLE doughs TYPE float;
+DEFINE FIELD timestamp ON TABLE doughs TYPE datetime;
+DEFINE FIELD total_wight ON TABLE doughs TYPE float;
+DEFINE FIELD water ON TABLE doughs TYPE float;
