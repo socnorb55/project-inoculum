@@ -1,6 +1,43 @@
 use chrono::Utc;
 use surrealdb::sql::Datetime;
 
+pub async fn create_dough(
+    database_connection: surrealdb::Surreal<surrealdb::engine::remote::ws::Client>,
+    fat: f32,
+    flour: f32,
+    hydration: f32,
+    leaven: f32,
+    name: String,
+    salt: f32,
+    sugar: f32,
+    total_weight: f32,
+    water: f32,
+) -> Result<(), Box<dyn std::error::Error>> {
+    let dough = crate::database::models::Dough {
+        fat,
+        flour,
+        hydration,
+        leaven,
+        name,
+        salt,
+        start_timestamp: Datetime::from(Utc::now()),
+        status: crate::database::models::DoughStatus::BulkProofing,
+        sugar,
+        total_weight,
+        update_timestamp: Datetime::from(Utc::now()),
+        water,
+    };
+    let created: Vec<crate::database::models::Dough> = database_connection
+        .query("CREATE doughs CONTENT $data")
+        .bind(("data", dough))
+        .await?
+        .take(0)?;
+
+    println!("Created dough: {:?}", created);
+
+    Ok(())
+}
+
 pub async fn start_dough(
     fat: Option<f32>,
     flour: Option<f32>,
@@ -12,28 +49,27 @@ pub async fn start_dough(
     sugar: Option<f32>,
     water: Option<f32>,
 ) -> Result<(), Box<dyn std::error::Error>> {
-
     let database_connection: surrealdb::Surreal<surrealdb::engine::remote::ws::Client> =
         crate::database::connection::get_database_client().await?;
 
     if recipe.is_some() {
-
         if scale.is_none() {
-
             println!("Scale (--scale) is a required field if using a recipe");
             return Ok(());
-
         } else {
-
             let scale_value = scale.unwrap();
 
-            let recipe: Option<crate::database::models::Recipe> = database_connection.query("SELECT * FROM recipes WHERE name = $name").bind(("name", recipe)).await?.take(0)?;
+            let recipe: Option<crate::database::models::Recipe> = database_connection
+                .query("SELECT * FROM recipes WHERE name = $name")
+                .bind(("name", recipe))
+                .await?
+                .take(0)?;
 
             let recipe_data = match recipe {
                 Some(data) => data,
                 None => {
                     println!("Recipe not found");
-                    return Ok(())
+                    return Ok(());
                 }
             };
 
@@ -49,30 +85,24 @@ pub async fn start_dough(
                 return Ok(());
             }
             let hydration = (water_value / flour_value) * 100.0;
-            let total_weight = fat_value + flour_value + leaven_value + salt_value + sugar_value + water_value;
+            let total_weight =
+                fat_value + flour_value + leaven_value + salt_value + sugar_value + water_value;
 
-            let dough = crate::database::models::Dough {
-                fat: fat_value,
-                flour: flour_value,
+            return create_dough(
+                database_connection,
+                fat_value,
+                flour_value,
                 hydration,
-                leaven: leaven_value,
+                leaven_value,
                 name,
-                salt: salt_value,
-                start_timestamp: Datetime::from(Utc::now()),
-                status: crate::database::models::DoughStatus::BulkProofing,
-                sugar: sugar_value,
+                salt_value,
+                sugar_value,
                 total_weight,
-                update_timestamp: Datetime::from(Utc::now()),
-                water: water_value,
-            };
-            let created: Vec<crate::database::models::Dough> = database_connection.query("CREATE doughs CONTENT $data").bind(("data", dough)).await?.take(0)?;
-
-            println!("Created dough: {:?}", created);
-
-            Ok(())
+                water_value,
+            )
+            .await;
         }
     } else {
-
         let numeric_params: &[(&str, Option<f32>)] = &[
             ("flour", flour),
             ("leaven", leaven),
@@ -87,13 +117,13 @@ pub async fn start_dough(
             .collect();
 
         if !missing_required_ingredients.is_empty() {
+            println!(
+                "Missing required ingredients: {:?}",
+                missing_required_ingredients
+            );
 
-            println!("Missing required ingredients: {:?}", missing_required_ingredients);
-
-            return Ok(())
-
+            return Ok(());
         } else {
-
             let fat_value = fat.unwrap_or(0.0);
             let flour_value = flour.unwrap();
             let leaven_value = leaven.unwrap();
@@ -106,28 +136,22 @@ pub async fn start_dough(
                 return Ok(());
             }
             let hydration = (water_value / flour_value) * 100.0;
-            let total_weight = fat_value + flour_value + leaven_value + salt_value + sugar_value + water_value;
+            let total_weight =
+                fat_value + flour_value + leaven_value + salt_value + sugar_value + water_value;
 
-            let dough = crate::database::models::Dough {
-                fat: fat_value,
-                flour: flour_value,
+            return create_dough(
+                database_connection,
+                fat_value,
+                flour_value,
                 hydration,
-                leaven: leaven_value,
+                leaven_value,
                 name,
-                salt: salt_value,
-                start_timestamp: Datetime::from(Utc::now()),
-                status: crate::database::models::DoughStatus::BulkProofing,
-                sugar: sugar_value,
+                salt_value,
+                sugar_value,
                 total_weight,
-                update_timestamp: Datetime::from(Utc::now()),
-                water: water_value,
-            };
-            let created: Vec<crate::database::models::Dough> = database_connection.query("CREATE doughs CONTENT $data").bind(("data", dough)).await?.take(0)?;
-
-            println!("Created dough: {:?}", created);
-
-            Ok(())
+                water_value,
+            )
+            .await;
         }
-
     }
 }
