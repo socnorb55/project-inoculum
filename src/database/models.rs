@@ -9,3 +9,28 @@ pub struct StarterFeeding {
     pub water_amount: f32,
     pub water_temp: f32,
 }
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct Dough {
+    pub fat: Option<f32>,
+    pub flour: f32,
+    pub hydration: f32,
+    pub leaven: f32,
+    pub name: String,
+    pub salt: f32,
+    pub start_timestamp: Datetime,
+    pub status: DoughStatus,
+    pub sugar: Option<f32>,
+    pub total_weight: f32,
+    pub update_timestamp: Datetime,
+    pub water: f32,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub enum DoughStatus {
+    BulkProofing,
+    Cooking,
+    Created,
+    SecondaryProofing,
+    Shaping,
+}
