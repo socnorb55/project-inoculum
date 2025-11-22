@@ -15,6 +15,6 @@ DEFINE FIELD salt ON TABLE doughs TYPE float;
 DEFINE FIELD start_timestamp ON TABLE doughs TYPE datetime;
 DEFINE FIELD status ON TABLE doughs TYPE string;
 DEFINE FIELD sugar ON TABLE doughs TYPE float;
-DEFINE FIELD total_wight ON TABLE doughs TYPE float;
+DEFINE FIELD total_weight ON TABLE doughs TYPE float;
 DEFINE FIELD update_timestamp ON TABLE doughs TYPE datetime;
 DEFINE FIELD water ON TABLE doughs TYPE float;
