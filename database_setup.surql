@@ -7,7 +7,7 @@ DEFINE FIELD water_temp ON TABLE starter_feeding_log TYPE float;
 
 DEFINE TABLE doughs SCHEMAFULL;
 DEFINE FIELD fat ON TABLE doughs TYPE float;
-DEFINE FIELD four ON TABLE doughs TYPE float;
+DEFINE FIELD flour ON TABLE doughs TYPE float;
 DEFINE FIELD hydration ON TABLE doughs TYPE float;
 DEFINE FIELD leaven ON TABLE doughs TYPE float;
 DEFINE FIELD name ON TABLE doughs TYPE string;
