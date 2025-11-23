@@ -17,13 +17,38 @@ pub struct Dough {
     pub water: f32,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub enum DoughStatus {
     BulkProofing,
     Cooking,
     Created,
     SecondaryProofing,
     Shaping,
+}
+
+impl std::str::FromStr for DoughStatus {
+    type Err = String;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s.to_lowercase().replace(" ", "").replace("-", "").as_str() {
+            "bulkproofing" => Ok(DoughStatus::BulkProofing),
+            "cooking" => Ok(DoughStatus::Cooking),
+            "created" => Ok(DoughStatus::Created),
+            "secondaryproofing" => Ok(DoughStatus::SecondaryProofing),
+            "shaping" => Ok(DoughStatus::Shaping),
+            _ => Err(format!(
+                "Invalid dough status: '{}'. Valid values are: bulkproofing, cooking, created, secondaryproofing, shaping",
+                s
+            )),
+        }
+    }
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct DoughStatusObject {
+    pub dough_name: String,
+    pub dough_status: DoughStatus,
+    pub timestamp: Datetime,
 }
 
 #[derive(Debug, Serialize, Deserialize)]

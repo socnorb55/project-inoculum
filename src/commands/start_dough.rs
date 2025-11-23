@@ -42,8 +42,8 @@ pub async fn start_dough(
     fat: Option<f32>,
     flour: Option<f32>,
     leaven: Option<f32>,
-    name: String,
-    recipe: Option<String>,
+    name: &str,
+    recipe: Option<&str>,
     salt: Option<f32>,
     scale: Option<f32>,
     sugar: Option<f32>,
@@ -61,7 +61,7 @@ pub async fn start_dough(
 
             let recipe: Option<crate::database::models::Recipe> = database_connection
                 .query("SELECT * FROM recipes WHERE name = $name")
-                .bind(("name", recipe))
+                .bind(("name", recipe.as_ref().unwrap().to_string()))
                 .await?
                 .take(0)?;
 
@@ -94,7 +94,7 @@ pub async fn start_dough(
                 flour_value,
                 hydration,
                 leaven_value,
-                name,
+                name.to_string(),
                 salt_value,
                 sugar_value,
                 total_weight,
@@ -145,7 +145,7 @@ pub async fn start_dough(
                 flour_value,
                 hydration,
                 leaven_value,
-                name,
+                name.to_string(),
                 salt_value,
                 sugar_value,
                 total_weight,

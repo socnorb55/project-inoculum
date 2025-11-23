@@ -18,3 +18,8 @@ DEFINE FIELD sugar ON TABLE doughs TYPE float;
 DEFINE FIELD total_weight ON TABLE doughs TYPE float;
 DEFINE FIELD update_timestamp ON TABLE doughs TYPE datetime;
 DEFINE FIELD water ON TABLE doughs TYPE float;
+
+DEFINE TABLE dough_statuses SCHEMAFULL;
+DEFINE FIELD dough_name ON TABLE dough_statuses TYPE string;
+DEFINE FIELD dough_status ON TABLE dough_statuses TYPE string;
+DEFINE FIELD timestamp ON TABLE dough_statuses TYPE datetime;
