@@ -35,7 +35,35 @@ Description: Creates an entry of a leaven starter feeding
 
 |    Parameter   |                 Description               |         Flag        | Required | Data Type |
 | :------------: | :---------------------------------------: | :-----------------: | :------: | :-------: |
-|  flour_amount  |       The amount (in grams) of flour      |  --flour_amount/-f  |   True   |   float   |
-| starter_amount |    The amount (in grams) of old starter   | --starter_amount/-s |   True   |   float   |
-|  water_amount  |      The amount (in grams) of water       |    --water_amount   |   True   |   float   |
+|  flour_amount  |       The amount (in grams) of flour      |  --flour-amount/-f  |   True   |   float   |
+| starter_amount |    The amount (in grams) of old starter   | --starter-amount/-s |   True   |   float   |
+|  water_amount  |      The amount (in grams) of water       |    --water-amount   |   True   |   float   |
 |   water_temp   | The temperature (in Celsius) of the water |     --water-temp    |   True   |   float   |
+
+### Feeding History
+
+Command: `feeding-history`
+
+Description: Provides a timeline of leaven starter feedings
+
+|    Parameter    |                           Description                        |           Flag        | Required | Data Type |
+| :-------------: | :----------------------------------------------------------: | :-------------------: | :------: | :-------: |
+| maximum_results | The number of starter feedings to return in descending order | --maximum-results/-m  |  False   |    int    |
+
+### Start Dough
+
+Command: `start-dough`
+
+Description: Creates a dough tracking object
+
+| Parameter |                   Description                  |   Flag   | Required | Data Type |
+| :-------: | :--------------------------------------------: | :------: | :------: | :-------: |
+|    fat    |    The amount (in grams) of fat in the dough   |   --fat  |   False  |   float   |
+|   flour   |   The amount (in grams) of flour in the dough  |  --flour |   False  |   float   |
+|   leaven  |  The amount (in grams) of leaven in the dough  | --leaven |   False  |   float   |
+|    name   |             The dough instance name            |  --name  |   True   |   string  |
+|   recipe  |        The recipe the dough is made from       | --recipe |   False  |   string  |
+|    salt   |   The amount (in grams) of salt in the dough   |  --salt  |   False  |   float   |
+|   scale   | The amount the recipe was scaled for the dough |  --scale |   False  |   float   |
+|   sugar   |   The amount (in grams) of sugar in the dough  |  --sugar |   False  |   float   |
+|   water   |   The amount (in grams) of water in the dough  |  --water |   False  |   float   |
