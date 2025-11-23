@@ -94,7 +94,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             water,
         }) => {
             commands::start_dough::start_dough(
-                *fat, *flour, *leaven, name, recipe, *salt, *scale, *sugar, *water,
+                *fat, *flour, *leaven, name, recipe.as_deref(), *salt, *scale, *sugar, *water,
             )
             .await?
         }
