@@ -56,6 +56,13 @@ enum Commands {
         #[arg(long)]
         water: Option<f32>,
     },
+    UpdateDough {
+        #[arg(short, long)]
+        dough_name: String,
+
+        #[arg(short, long)]
+        updated_status: String,
+    },
 }
 
 #[tokio::main]
@@ -87,9 +94,15 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             water,
         }) => {
             commands::start_dough::start_dough(
-                *fat, *flour, *leaven, name.clone(), recipe.clone(), *salt, *scale, *sugar, *water,
+                *fat, *flour, *leaven, name, recipe, *salt, *scale, *sugar, *water,
             )
             .await?
+        }
+        Some(Commands::UpdateDough {
+            dough_name,
+            updated_status,
+        }) => {
+            commands::update_dough::update_dough(dough_name, updated_status).await?
         }
         None => {
             println!("No command provided");
