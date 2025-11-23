@@ -26,6 +26,28 @@ pub enum DoughStatus {
     Shaping,
 }
 
+impl std::str::FromStr for DoughStatus {
+    type Err = String;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s.to_lowercase().as_str() {
+            "bulkproofing" => Ok(DoughStatus::BulkProofing),
+            "cooking" => Ok(DoughStatus::Cooking),
+            "created" => Ok(DoughStatus::Created),
+            "secondaryproofing" => Ok(DoughStatus::SecondaryProofing),
+            "shaping" => Ok(DoughStatus::Shaping),
+            _ => Err(format!("Invalid dough status: {}", s)),
+        }
+    }
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct DoughStatusObject {
+    pub dough_name: String,
+    pub dough_status: DoughStatus,
+    pub timestamp: Datetime,
+}
+
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Recipe {
     pub fat: Option<f32>,
