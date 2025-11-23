@@ -23,7 +23,7 @@
 3. Create a Namespace with the name defined in the `SURREAL_DB_NAMESPACE` variable from the `.env` file
 4. Create a Database with the name defined in the `SURREAL_DB_NAME` variable from the `.env` file
 5. Create a system user with `Editor` permission with the `SURREAL_DB_USERNAME` and `SURREAL_DB_PASSWORD` credentials from the `.env` file
-5. Run the query defined in the [database_setup.surql](database_setup.surql) file
+6. Run the query defined in the [database_setup.surql](database_setup.surql) file
 
 ## Commands
 
