@@ -36,7 +36,10 @@ impl std::str::FromStr for DoughStatus {
             "created" => Ok(DoughStatus::Created),
             "secondaryproofing" => Ok(DoughStatus::SecondaryProofing),
             "shaping" => Ok(DoughStatus::Shaping),
-            _ => Err(format!("Invalid dough status: {}", s)),
+            _ => Err(format!(
+                "Invalid dough status: '{}'. Valid values are: bulkproofing, cooking, created, secondaryproofing, shaping",
+                s
+            )),
         }
     }
 }
