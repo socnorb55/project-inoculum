@@ -17,7 +17,7 @@ pub struct Dough {
     pub water: f32,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub enum DoughStatus {
     BulkProofing,
     Cooking,
@@ -30,7 +30,7 @@ impl std::str::FromStr for DoughStatus {
     type Err = String;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        match s.to_lowercase().as_str() {
+        match s.to_lowercase().replace(" ", "").replace("-", "").as_str() {
             "bulkproofing" => Ok(DoughStatus::BulkProofing),
             "cooking" => Ok(DoughStatus::Cooking),
             "created" => Ok(DoughStatus::Created),
