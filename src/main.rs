@@ -11,6 +11,13 @@ struct Cli {
 
 #[derive(Subcommand)]
 enum Commands {
+    EndDough {
+        #[arg(short, long)]
+        name: String,
+
+        #[arg(short, long)]
+        notes: String
+    },
     FeedingHistory {
         #[arg(short, long)]
         maximum_results: Option<i32>,
@@ -70,6 +77,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let arguments: Cli = Cli::parse();
 
     match &arguments.command {
+        Some(Commands::EndDough { name, notes }) => {
+            commands::end_dough::end_dough(name, notes).await?
+        }
         Some(Commands::FeedingHistory { maximum_results }) => {
             commands::feeding_history::feeding_history(*maximum_results).await?
         }
