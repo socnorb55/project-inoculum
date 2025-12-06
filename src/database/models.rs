@@ -8,6 +8,7 @@ pub struct Dough {
     pub hydration: f32,
     pub leaven: f32,
     pub name: String,
+    pub notes: String,
     pub salt: f32,
     pub start_timestamp: Datetime,
     pub status: DoughStatus,
@@ -22,6 +23,7 @@ pub enum DoughStatus {
     BulkProofing,
     Cooking,
     Created,
+    Ended,
     SecondaryProofing,
     Shaping,
 }

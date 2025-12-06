@@ -19,6 +19,7 @@ pub async fn create_dough(
         hydration,
         leaven,
         name,
+        notes: String::new(),
         salt,
         start_timestamp: Datetime::from(Utc::now()),
         status: crate::database::models::DoughStatus::BulkProofing,
