@@ -21,8 +21,8 @@ pub async fn end_dough(name: &String, notes: &String) -> Result<(), Box<dyn std:
     let ended: Vec<crate::database::models::Dough> = database_connection
         .query("UPDATE doughs SET notes = $notes, status = $status, update_timestamp = time::now() WHERE name = $name RETURN AFTER;")
         .bind(("status", crate::database::models::DoughStatus::Ended))
-        .bind(("name", name.clone()))
-        .bind(("notes", notes.clone()))
+        .bind(("name", name.to_string()))
+        .bind(("notes", notes.to_string()))
         .await?
         .take(0)?;
 
