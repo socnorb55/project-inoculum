@@ -1,7 +1,7 @@
 use chrono::Utc;
 use surrealdb::sql::Datetime;
 
-pub async fn end_dough(name: &String, notes: &String) -> Result<(), Box<dyn std::error::Error>> {
+pub async fn end_dough(name: &str, notes: &str) -> Result<(), Box<dyn std::error::Error>> {
     let database_connection: surrealdb::Surreal<surrealdb::engine::remote::ws::Client> =
         crate::database::connection::get_database_client().await?;
 
