@@ -12,10 +12,10 @@ struct Cli {
 #[derive(Subcommand)]
 enum Commands {
     EndDough {
-        #[arg(short, long)]
+        #[arg(long)]
         name: String,
 
-        #[arg(short, long)]
+        #[arg(long)]
         notes: String
     },
     FeedingHistory {

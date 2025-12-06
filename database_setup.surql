@@ -11,6 +11,7 @@ DEFINE FIELD flour ON TABLE doughs TYPE float;
 DEFINE FIELD hydration ON TABLE doughs TYPE float;
 DEFINE FIELD leaven ON TABLE doughs TYPE float;
 DEFINE FIELD name ON TABLE doughs TYPE string;
+DEFINE FIELD notes ON TABLE doughs TYPE string;
 DEFINE FIELD salt ON TABLE doughs TYPE float;
 DEFINE FIELD start_timestamp ON TABLE doughs TYPE datetime;
 DEFINE FIELD status ON TABLE doughs TYPE string;
